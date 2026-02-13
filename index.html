@@ -82,7 +82,6 @@ seguiras conmigo el año que viene?
 </div>
 
 </main>
-
 <script>
 const photo=document.getElementById("photo");
 const text=document.getElementById("text");
@@ -93,12 +92,27 @@ const buttons=document.getElementById("buttons");
 
 let timer=null;
 
+// escalas acumulativas para NO
+let yesScale = 1;
+let noScale  = 1;
+
+function applyScales(){
+  yes.style.transform = `scale(${yesScale})`;
+  no.style.transform  = `scale(${noScale})`;
+}
+
+// SI
 yes.onclick=()=>{
   if(timer) clearTimeout(timer);
+
+  // vuelve a la foto de inicio
+  photo.src="inicio.jpg";
+
   text.textContent="sabía que dirías que si mi amor ❤️";
   buttons.classList.add("hidden");
 };
 
+// ME LO PIENSO
 maybe.onclick=()=>{
   if(timer) clearTimeout(timer);
   photo.src="pienso.jpg";
@@ -108,11 +122,16 @@ maybe.onclick=()=>{
   },2000);
 };
 
+// NO (acumulativo)
 no.onclick=()=>{
   if(timer) clearTimeout(timer);
+
   photo.src="no.jpg";
-  yes.classList.add("big");
-  no.classList.add("small");
+
+  // cada click: sí + grande, no + pequeño
+  yesScale = Math.min(2.2, yesScale * 1.12);  // límite para que no se vaya loco
+  noScale  = Math.max(0.25, noScale * 0.88);  // límite mínimo
+  applyScales();
 };
 </script>
 
