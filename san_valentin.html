@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>San Valentín</title>
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family: system-ui, Arial;
+  background:#f2f3f7;
+}
+
+.card{
+  width:min(560px,95%);
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-radius:14px;
+}
+
+p{
+  margin:16px 0;
+  font-size:17px;
+  line-height:1.4;
+}
+
+.buttons{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+}
+
+button{
+  border:0;
+  padding:12px 18px;
+  border-radius:12px;
+  font-size:16px;
+  cursor:pointer;
+  transition:.18s;
+  min-width:130px;
+}
+
+.yes{ background:#22c55e;color:white;}
+.maybe{ background:#f59e0b;color:white;}
+.no{ background:#ef4444;color:white;}
+
+.big{ transform:scale(1.25);}
+.small{ transform:scale(.75);}
+.hidden{ display:none;}
+</style>
+</head>
+
+<body>
+<main class="card">
+
+<img id="photo" src="inicio.jpg">
+
+<p id="text">
+Quiero tener más detalles contigo y que te sientas mejor con esto,
+este San Valentin no he sido detallista, pero el que viene te va a encantar,
+seguiras conmigo el año que viene?
+</p>
+
+<div id="buttons" class="buttons">
+  <button id="yes" class="yes">Sí</button>
+  <button id="maybe" class="maybe">Me lo pienso</button>
+  <button id="no" class="no">No</button>
+</div>
+
+</main>
+
+<script>
+const photo=document.getElementById("photo");
+const text=document.getElementById("text");
+const yes=document.getElementById("yes");
+const maybe=document.getElementById("maybe");
+const no=document.getElementById("no");
+const buttons=document.getElementById("buttons");
+
+let timer=null;
+
+yes.onclick=()=>{
+  if(timer) clearTimeout(timer);
+  text.textContent="sabía que dirías que si mi amor ❤️";
+  buttons.classList.add("hidden");
+};
+
+maybe.onclick=()=>{
+  if(timer) clearTimeout(timer);
+  photo.src="pienso.jpg";
+  text.textContent="Mmmm...";
+  timer=setTimeout(()=>{
+    text.textContent="¿ya te lo has pensado?";
+  },2000);
+};
+
+no.onclick=()=>{
+  if(timer) clearTimeout(timer);
+  photo.src="no.jpg";
+  yes.classList.add("big");
+  no.classList.add("small");
+};
+</script>
+
+</body>
+</html>
